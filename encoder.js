@@ -3,7 +3,7 @@ class encoder {
     }
 
     encode(string, shift) {
-        console.log("String: " + string)
+        console.log("Input string: " + string)
         let encodedString = "";
         for (let i = 0; i < string.length; i++) {
             let code = string.charCodeAt(i);
@@ -25,6 +25,9 @@ class encoder {
 let enc = new encoder();
 
 console.log(enc.encode("ABC", 1));
+console.log(enc.encode("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2));
+console.log(enc.encode("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 3));
+
 
 console.assert(enc.encode("A", 1) == "B", "Did not return correct char for args A and 1");
 console.assert(enc.encode("B", -1) == "A", "Did not return correct char for args B and -1");
