@@ -1,9 +1,9 @@
 class encoder {
-    constructor(shift) {
+    constructor(dfltshift) {
+        this.defaultShift = dfltshift;
     }
 
-    encode(string, shift) {
-        console.log("Input string: " + string)
+    encode(string, shift=this.defaultShift) {
         let encodedString = "";
         for (let i = 0; i < string.length; i++) {
             let code = string.charCodeAt(i);
@@ -19,6 +19,23 @@ class encoder {
         }
 
         return encodedString.trim();
+    }
+
+    decode(string, shift=this.defaultShift) {
+        let encodedString = "";
+        for (let i = 0; i < string.length; i++) {
+            let code = string.charCodeAt(i);
+            code = parseInt(code) + shift;
+            let codeLen = code.length;
+            if (code > 127) {
+                code = code - 127;
+            } else if (code < 0) {
+                code = 0 + code;
+            }
+            encodedString += " " + String.fromCharCode(code);
+        }
+
+        return encodedString.trim()
     }
 }
 
