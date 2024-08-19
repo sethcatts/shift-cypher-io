@@ -4,42 +4,32 @@ class encoder {
     }
 
     prepare(string) {
-        let encoderObj = {code: [], shift: 0};
+        let encoderObj = {code: [], shift: 0, shifted: false};
         for (let i = 0; i < string.length; i++) {
-           encoderOjb.code.push(string.charCodeAt(i); 
+           encoderObj.code.push(string.charCodeAt(i)); 
         }
         return encoderObj;
     }
 
-    encode(string, shift=this.defaultShift) {
-        let encodedString = "";
-        for (let i = 0; i < string.length; i++) {
-            let code = string.charCodeAt(i);
-            code = parseInt(code) + shift;
+    encode(encoderObj, shift) {
+        for (let i = 0; i < encoderObj.code.length; i++) {
+            let shiftedCode = parseInt(encoderObj.code[i]) + shift;
+            encoderObj.code[i] = shiftedCode;
         }
-        return encodedString.trim();
+        encoderObj.shifted = true;
+        encoderObj.shift = shift;
+        return encoderObj;
     }
 
-    decode(string, shift=this.defaultShift) {
-        let encodedString = "";
-        for (let i = 0; i < string.length; i++) {
-            let code = string.charCodeAt(i);
-            code = parseInt(code) + shift;
-            let codeLen = code.length;
-            if (code > 127) {
-                code = code - 127;
-            } else if (code < 0) {
-                code = 0 + code;
-            }
-            encodedString += " " + String.fromCharCode(code);
-        }
-        return encodedString.trim()
+    decode(encoderObj, shift) {
+        return 0;        
     }
 }
 
 let enc = new encoder();
-let string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let encodedString = enc.encode(string, 2);
-console.log(encodedString);
-
-
+let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let prep = enc.prepare(str);
+console.log(prep);
+console.log("\r\r");
+let enco = enc.encode(prep, 1);
+console.log(enco);
